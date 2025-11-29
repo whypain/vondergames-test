@@ -8,6 +8,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] Transform slotsParent;
     [SerializeField] ItemSO TestItem;
 
+    public bool IsFull { get; private set; }
+
     private Slot selectedSlot;
     private List<Slot> slots;
 
@@ -40,6 +42,9 @@ public class Inventory : MonoBehaviour
                 return;
             }
         }
+
+        IsFull = true;
+        Debug.Log("Inventory is full!");
     }
 
     public void SelectSlot(Slot slot)
