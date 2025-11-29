@@ -39,6 +39,12 @@ public class Slot : MonoBehaviour
 
     public void SetItem(ItemSO newItem, int count)
     {
+        if (newItem == null || count <= 0)
+        {
+            ClearItem();
+            return;
+        }
+
         item = newItem;
         itemCount = count;
         iconImage.sprite = item.Icon;
@@ -82,6 +88,7 @@ public class Slot : MonoBehaviour
         }
 
         UpdateCountText();
+        OnItemChanged?.Invoke(item);
         return result;
     }
 
@@ -134,6 +141,12 @@ public class Slot : MonoBehaviour
 
         targetSlot.SetItem(tempItem, tempCount);
         targetSlot.UpdateCountText();
+    }
+
+    public void MergeItemTo(Slot targetSlot)
+    {
+        targetSlot.TryAddItem(itemCount, out int remainder);
+        SetItem(item, remainder);
     }
 
     private void UpdateCountText()

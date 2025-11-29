@@ -25,9 +25,13 @@ public class DraggableSlot : Slot, IBeginDragHandler, IDragHandler, IDropHandler
         Inventory.DraggedFromSlot.SetIconAlpha(normalIconAlpha);
         Inventory.SetDraggedTo(this);
 
-        if (item != null)
+        if (item != null && item != Inventory.DraggedFromSlot.Item)
         {
             SwapItemWith(Inventory.DraggedFromSlot);
+        }
+        else if (item != null && item == Inventory.DraggedFromSlot.Item)
+        {
+            Inventory.DraggedFromSlot.MergeItemTo(this);
         }
         else 
         {
