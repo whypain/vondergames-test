@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,6 +7,10 @@ public class InventoryBar : Inventory
 {
     [SerializeField] Transform selectedFrame;
     [SerializeField] List<InputActionReference> hotkeyActions;
+
+    public ItemSO CurrItem => currItem;
+    public Slot CurrSlot => currSlot;
+    public Action<Slot> OnCurrSlotChanged;
 
     private Slot currSlot;
     private ItemSO currItem => currSlot?.Item;
@@ -34,5 +39,6 @@ public class InventoryBar : Inventory
     {
         currSlot = slots[index];
         selectedFrame.position = currSlot.transform.position;
+        OnCurrSlotChanged?.Invoke(currSlot);
     }
 }

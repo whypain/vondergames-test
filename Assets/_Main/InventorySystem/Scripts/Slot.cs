@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,6 +20,8 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
     public int ItemCount => itemCount;
     public Button Button => button;
 
+    public Action<ItemSO> OnItemChanged;
+
     private ItemSO item;
     private int itemCount;
     private Inventory inventory;
@@ -36,6 +39,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
         iconImage.enabled = true;
 
         UpdateCountText();
+        OnItemChanged?.Invoke(item);
     }
 
     public void SetItem(ItemSO newItem, int count)
@@ -46,6 +50,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
         iconImage.enabled = true;
 
         UpdateCountText();
+        OnItemChanged?.Invoke(item);
     }
 
     public void ClearItem()
@@ -56,6 +61,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
         iconImage.enabled = false;
 
         UpdateCountText();
+        OnItemChanged?.Invoke(item);
     }
 
     public bool TryAddItem(int count, out int remainder)

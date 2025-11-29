@@ -7,4 +7,5 @@ public class ItemSO : ScriptableObject
     public Sprite Icon;
     public Item ItemPrefab;
     public int MaxStack;
+    public bool IsConsumable;
 }
