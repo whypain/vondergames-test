@@ -1,6 +1,6 @@
 using UnityEngine.EventSystems;
 
-public class HotbarSlot : Slot
+public class HotbarSlot : DraggableSlot
 {
     private bool isDraggable;
 

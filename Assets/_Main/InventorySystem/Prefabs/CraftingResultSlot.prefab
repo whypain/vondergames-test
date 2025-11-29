@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4488135937612288965
+--- !u!1001 &8117557679989393521
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,9 +8,53 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1434786469707780814, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+      propertyPath: m_fontSize
+      value: 40.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2109442982279347002, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
       propertyPath: m_Name
-      value: HotbarSlot
+      value: Slot Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667392045734930381, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+      propertyPath: m_Pivot.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667392045734930381, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667392045734930381, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667392045734930381, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667392045734930381, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667392045734930381, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667392045734930381, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667392045734930381, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667392045734930381, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667392045734930381, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8500182676497670498, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
       propertyPath: m_Pivot.x
@@ -22,27 +66,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8500182676497670498, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8500182676497670498, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8500182676497670498, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8500182676497670498, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8500182676497670498, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8500182676497670498, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8500182676497670498, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -94,29 +138,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3359388001161007446, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
-    - {fileID: 510015698218454221, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2109442982279347002, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8919847932311054801}
+      addedObject: {fileID: 806891935195247984}
   m_SourcePrefab: {fileID: 100100000, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
---- !u!114 &1796280715248239021 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2784530859125510760, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
-  m_PrefabInstance: {fileID: 4488135937612288965}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2042416123183497057 stripped
+--- !u!114 &5960033397969085653 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2454762512154520740, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
-  m_PrefabInstance: {fileID: 4488135937612288965}
+  m_PrefabInstance: {fileID: 8117557679989393521}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -124,32 +156,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2526291708190714111 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2109442982279347002, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
-  m_PrefabInstance: {fileID: 4488135937612288965}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8919847932311054801
+--- !u!114 &6198078590752987673 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2784530859125510760, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+  m_PrefabInstance: {fileID: 8117557679989393521}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2526291708190714111}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6712ceaf7682ec94bb9d44a9710bcea8, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 1796280715248239021}
-  countText: {fileID: 3287748030391091467}
-  button: {fileID: 2042416123183497057}
-  dragIconAlpha: 0.6
-  normalIconAlpha: 1
---- !u!114 &3287748030391091467 stripped
+--- !u!114 &7155719541794478783 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1434786469707780814, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
-  m_PrefabInstance: {fileID: 4488135937612288965}
+  m_PrefabInstance: {fileID: 8117557679989393521}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -157,3 +178,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7917720141602779979 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2109442982279347002, guid: cbdd5ea81ae133f4394506995a6ec4fb, type: 3}
+  m_PrefabInstance: {fileID: 8117557679989393521}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &806891935195247984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7917720141602779979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4085477bd38c86e49850cf5c4c4f795f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconImage: {fileID: 6198078590752987673}
+  countText: {fileID: 7155719541794478783}
+  button: {fileID: 5960033397969085653}
+  dragIconAlpha: 0.6
+  normalIconAlpha: 1

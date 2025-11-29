@@ -1,30 +1,25 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler, IEndDragHandler
+public class Slot : MonoBehaviour
 {
     [SerializeField] private Image iconImage;
     [SerializeField] private TMP_Text countText;
     [SerializeField] private Button button;
 
-    [Range(0f, 1f)]
-    [SerializeField] private float dragIconAlpha = 0.6f;
-
-    [Range(0f, 1f)]
-    [SerializeField] private float normalIconAlpha = 1f;
 
     public ItemSO Item => item;
     public int ItemCount => itemCount;
     public Button Button => button;
+    public Inventory Inventory => inventory;
 
     public Action<ItemSO> OnItemChanged;
 
-    private ItemSO item;
-    private int itemCount;
-    private Inventory inventory;
+    protected ItemSO item;
+    protected int itemCount;
+    protected Inventory inventory;
 
     public void Initialize(Inventory inventory)
     {
@@ -145,54 +140,6 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
     {
         countText.text = itemCount.ToString();
         countText.enabled = itemCount > 1;
-    }
-
-
-
-    public virtual void OnBeginDrag(PointerEventData eventData)
-    {
-        if (item == null) return;
-        Inventory.SetDraggedFrom(this);
-
-        SetIconAlpha(dragIconAlpha);
-    }
-
-    public virtual void OnDrop(PointerEventData eventData)
-    {
-        if (Inventory.DraggedFromSlot == null) return;
-
-        Inventory.DraggedFromSlot.SetIconAlpha(normalIconAlpha);
-        Inventory.SetDraggedTo(this);
-
-        if (item != null)
-        {
-            SwapItemWith(Inventory.DraggedFromSlot);
-        }
-        else 
-        {
-            Inventory.DraggedFromSlot.MoveItemTo(this);
-        }
-
-        Inventory.SetDraggedFrom(null);
-    }
-
-    public virtual void OnEndDrag(PointerEventData eventData)
-    {
-        if (Inventory.DraggedToSlot == null)
-        {
-            SetIconAlpha(normalIconAlpha);
-            Inventory.DraggedFromSlot.inventory?.RemoveItem(this, Inventory.DraggedFromSlot.ItemCount);
-        }
-        else
-        {
-            Inventory.SetDraggedTo(null);
-        }
-    }
-
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        // 
     }
 }
 
