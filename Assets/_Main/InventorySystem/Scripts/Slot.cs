@@ -9,6 +9,12 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
     [SerializeField] private TMP_Text countText;
     [SerializeField] private Button button;
 
+    [Range(0f, 1f)]
+    [SerializeField] private float dragIconAlpha = 0.6f;
+
+    [Range(0f, 1f)]
+    [SerializeField] private float normalIconAlpha = 1f;
+
     public ItemSO Item => item;
     public int ItemCount => itemCount;
     public Button Button => button;
@@ -142,7 +148,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
         if (item == null) return;
         Inventory.SetDraggedFrom(this);
 
-        SetIconAlpha(0.6f);
+        SetIconAlpha(dragIconAlpha);
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -150,7 +156,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
         if (Inventory.DraggedFromSlot == null) return;
         // Debug.Log($"From {Inventory.DraggedFromSlot.inventory.name}/{Inventory.DraggedFromSlot.name} to {inventory.name}/{name}");
 
-        Inventory.DraggedFromSlot.SetIconAlpha(1f);
+        Inventory.DraggedFromSlot.SetIconAlpha(normalIconAlpha);
         Inventory.SetDraggedTo(this);
 
         if (item != null)
@@ -169,8 +175,8 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
     {
         if (Inventory.DraggedToSlot == null)
         {
-            SetIconAlpha(1f);
-            Inventory.DraggedFromSlot.inventory.RemoveItem(Inventory.DraggedFromSlot.Item, Inventory.DraggedFromSlot.ItemCount);
+            SetIconAlpha(normalIconAlpha);
+            Inventory.DraggedFromSlot.inventory.RemoveItem(this, Inventory.DraggedFromSlot.ItemCount);
         }
         else
         {

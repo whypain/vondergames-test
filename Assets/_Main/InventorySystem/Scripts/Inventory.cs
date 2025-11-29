@@ -58,7 +58,12 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        if (!foundSlot.TryRemoveItem(count))
+        RemoveItem(foundSlot, count);
+    }
+
+    public void RemoveItem(Slot slot, int count)
+    {
+        if (!slot.TryRemoveItem(count))
         {
             Debug.LogWarning("Not enough items to remove!");
         }
