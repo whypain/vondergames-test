@@ -9,14 +9,14 @@ public class Inventory : MonoBehaviour
     [SerializeField] ItemSO TestItem;
 
     public bool IsFull { get; private set; }
-    public Slot DraggedFromSlot => draggedFromSlot;
-    public Slot DraggedToSlot => draggedToSlot;
+    public static Slot DraggedFromSlot => draggedFromSlot;
+    public static Slot DraggedToSlot => draggedToSlot;
 
-    private Slot draggedFromSlot;
-    private Slot draggedToSlot;
-    private List<Slot> slots;
+    private static Slot draggedFromSlot;
+    private static Slot draggedToSlot;
+    protected List<Slot> slots;
 
-    void Awake()
+    protected virtual void Awake()
     {
         slots = new List<Slot>();
         InitializeSlots();
@@ -66,12 +66,12 @@ public class Inventory : MonoBehaviour
         IsFull = false;
     }
 
-    public void SetDraggedFrom(Slot slot)
+    public static void SetDraggedFrom(Slot slot)
     {
         draggedFromSlot = slot;
     }
 
-    public void SetDraggedTo(Slot slot)
+    public static void SetDraggedTo(Slot slot)
     {
         draggedToSlot = slot;
     }

@@ -10,6 +10,8 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
     [SerializeField] private Button button;
 
     public ItemSO Item => item;
+    public int ItemCount => itemCount;
+    public Button Button => button;
 
     private ItemSO item;
     private int itemCount;
@@ -24,6 +26,16 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
     public void SetItem(ItemSO newItem)
     {
         item = newItem;
+        iconImage.sprite = item.Icon;
+        iconImage.enabled = true;
+
+        UpdateCountText();
+    }
+
+    public void SetItem(ItemSO newItem, int count)
+    {
+        item = newItem;
+        itemCount = count;
         iconImage.sprite = item.Icon;
         iconImage.enabled = true;
 
@@ -99,8 +111,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
 
     public void MoveItemTo(Slot targetSlot)
     {
-        targetSlot.SetItem(item);
-        targetSlot.itemCount = itemCount;
+        targetSlot.SetItem(item, itemCount);
         targetSlot.UpdateCountText();
 
         ClearItem();
@@ -111,12 +122,10 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
         var tempItem = item;
         var tempCount = itemCount;
 
-        SetItem(targetSlot.Item);
-        itemCount = targetSlot.itemCount;
+        SetItem(targetSlot.Item, targetSlot.ItemCount);
         UpdateCountText();
 
-        targetSlot.SetItem(tempItem);
-        targetSlot.itemCount = tempCount;
+        targetSlot.SetItem(tempItem, tempCount);
         targetSlot.UpdateCountText();
     }
 
@@ -131,40 +140,41 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (item == null) return;
-        inventory.SetDraggedFrom(this);
+        Inventory.SetDraggedFrom(this);
 
         SetIconAlpha(0.6f);
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (inventory.DraggedFromSlot == null) return;
+        if (Inventory.DraggedFromSlot == null) return;
+        // Debug.Log($"From {Inventory.DraggedFromSlot.inventory.name}/{Inventory.DraggedFromSlot.name} to {inventory.name}/{name}");
 
-        inventory.DraggedFromSlot.SetIconAlpha(1f);
-        inventory.SetDraggedTo(this);
+        Inventory.DraggedFromSlot.SetIconAlpha(1f);
+        Inventory.SetDraggedTo(this);
 
         if (item != null)
         {
-            SwapItemWith(inventory.DraggedFromSlot);
+            SwapItemWith(Inventory.DraggedFromSlot);
         }
         else 
         {
-            inventory.DraggedFromSlot.MoveItemTo(this);
+            Inventory.DraggedFromSlot.MoveItemTo(this);
         }
 
-        inventory.SetDraggedFrom(null);
+        Inventory.SetDraggedFrom(null);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (inventory.DraggedToSlot == null)
+        if (Inventory.DraggedToSlot == null)
         {
             SetIconAlpha(1f);
-            ClearItem();
+            Inventory.DraggedFromSlot.inventory.RemoveItem(Inventory.DraggedFromSlot.Item, Inventory.DraggedFromSlot.ItemCount);
         }
         else
         {
-            inventory.SetDraggedTo(null);
+            Inventory.SetDraggedTo(null);
         }
     }
 
