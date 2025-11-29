@@ -23,10 +23,9 @@ public class Slot : MonoBehaviour
         ClearItem();
     }
 
-    public void SetItem(ItemSO newItem, int count)
+    public void SetItem(ItemSO newItem)
     {
         item = newItem;
-        itemCount = count;
         iconImage.sprite = item.Icon;
         iconImage.enabled = true;
 

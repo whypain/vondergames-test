@@ -33,9 +33,10 @@ public class Inventory : MonoBehaviour
 
         foreach (var slot in slots)
         {
-            if (!slot.IsFull())
+            if (!slot.IsFull() && slot.Item == null)
             {
-                slot.SetItem(itemSO, count);
+                slot.SetItem(itemSO);
+                AddItem(itemSO, count);
                 return;
             }
         }
