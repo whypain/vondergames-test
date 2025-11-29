@@ -7,6 +7,7 @@ public class CraftFromBar : MonoBehaviour
     [SerializeField] InventoryBar inventoryBar;
     [SerializeField] CraftingController craftingController;
     [SerializeField] Slot resultSlot;
+    [SerializeField] CanvasGroup canvasGroup;
 
     [SerializeField] ItemSO testItem;
     [SerializeField] int testQuantity;
@@ -23,6 +24,8 @@ public class CraftFromBar : MonoBehaviour
     {
         resultSlot.Initialize(null);
         resultSlot.Button.onClick.AddListener(() => Craft());
+
+        canvasGroup.alpha = 0f;
     }
 
     private void OnCurrItemChanged(ItemSO item)
@@ -31,10 +34,12 @@ public class CraftFromBar : MonoBehaviour
         if (recipe != null)
         {
             resultSlot.SetItem(recipe.Result);
+            canvasGroup.alpha = 1f;
         }
         else
         {
             resultSlot.ClearItem();
+            canvasGroup.alpha = 0f;
         }
     }
 

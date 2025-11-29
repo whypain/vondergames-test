@@ -227,6 +227,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &510448892 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 834677164239427214, guid: 91dc20f12f8e2ea4a9bd645af50c2b34, type: 3}
+  m_PrefabInstance: {fileID: 7823302877176408532}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &544502616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,6 +1940,7 @@ MonoBehaviour:
   inventoryBar: {fileID: 1354127889}
   craftingController: {fileID: 7823302877176408533}
   resultSlot: {fileID: 7759571021521861959}
+  canvasGroup: {fileID: 510448892}
   testItem: {fileID: 11400000, guid: 56a47235ca640304cadd85048c03016c, type: 2}
   testQuantity: 10
 --- !u!1 &1989566351
