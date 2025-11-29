@@ -16,3 +16,7 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: c174da9317f89f64ba8c662780f6bb5c, type: 3}
   ItemPrefab: {fileID: 6206602527542596157, guid: d5ec7a770b7bed4419e5f84775f8aef8, type: 3}
   MaxStack: 1
+  IsConsumable: 1
+  CraftingMaterials:
+  - Item: {fileID: 11400000, guid: 56a47235ca640304cadd85048c03016c, type: 2}
+    Quantity: 10

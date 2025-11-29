@@ -160,7 +160,6 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
     public virtual void OnDrop(PointerEventData eventData)
     {
         if (Inventory.DraggedFromSlot == null) return;
-        // Debug.Log($"From {Inventory.DraggedFromSlot.inventory.name}/{Inventory.DraggedFromSlot.name} to {inventory.name}/{name}");
 
         Inventory.DraggedFromSlot.SetIconAlpha(normalIconAlpha);
         Inventory.SetDraggedTo(this);
@@ -182,7 +181,7 @@ public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler
         if (Inventory.DraggedToSlot == null)
         {
             SetIconAlpha(normalIconAlpha);
-            Inventory.DraggedFromSlot.inventory.RemoveItem(this, Inventory.DraggedFromSlot.ItemCount);
+            Inventory.DraggedFromSlot.inventory?.RemoveItem(this, Inventory.DraggedFromSlot.ItemCount);
         }
         else
         {
