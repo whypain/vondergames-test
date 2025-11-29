@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotsParent: {fileID: 9180966868045892737}
-  TestItem: {fileID: 11400000, guid: 56a47235ca640304cadd85048c03016c, type: 2}
+  TestItem: {fileID: 11400000, guid: 1e8850c4dde3a9f44963ba01e07cfd1f, type: 2}
 --- !u!1001 &164398663476607972
 PrefabInstance:
   m_ObjectHideFlags: 0
