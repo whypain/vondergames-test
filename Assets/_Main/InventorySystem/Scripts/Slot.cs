@@ -1,9 +1,9 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour
+public class Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IDropHandler, IEndDragHandler
 {
     [SerializeField] private Image iconImage;
     [SerializeField] private TMP_Text countText;
@@ -18,8 +18,6 @@ public class Slot : MonoBehaviour
     public void Initialize(Inventory inventory)
     {
         this.inventory = inventory;
-        button.onClick.AddListener(OnSlotClicked);
-
         ClearItem();
     }
 
@@ -68,9 +66,58 @@ public class Slot : MonoBehaviour
         return result;
     }
 
+    public bool TryRemoveItem(int count)
+    {
+        if (item == null || count < 0)
+        {
+            return false;
+        }
+
+        itemCount = Mathf.Max(itemCount - count, 0);
+
+        if (itemCount == 0)
+        {
+            ClearItem();
+        }
+        else
+        {
+            UpdateCountText();
+        }
+
+        return true;
+    }
+
     public bool IsFull()
     {
         return item != null && itemCount >= item.MaxStack;
+    }
+
+    public void SetIconAlpha(float alpha)
+    {
+        iconImage.color = iconImage.color.WithAlpha(alpha);
+    }
+
+    public void MoveItemTo(Slot targetSlot)
+    {
+        targetSlot.SetItem(item);
+        targetSlot.itemCount = itemCount;
+        targetSlot.UpdateCountText();
+
+        ClearItem();
+    }
+
+    public void SwapItemWith(Slot targetSlot)
+    {
+        var tempItem = item;
+        var tempCount = itemCount;
+
+        SetItem(targetSlot.Item);
+        itemCount = targetSlot.itemCount;
+        UpdateCountText();
+
+        targetSlot.SetItem(tempItem);
+        targetSlot.itemCount = tempCount;
+        targetSlot.UpdateCountText();
     }
 
     private void UpdateCountText()
@@ -79,8 +126,59 @@ public class Slot : MonoBehaviour
         countText.enabled = itemCount > 1;
     }
 
-    private void OnSlotClicked()
+
+
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        inventory.SelectSlot(this);
+        if (item == null) return;
+        inventory.SetDraggedFrom(this);
+
+        SetIconAlpha(0.6f);
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        if (inventory.DraggedFromSlot == null) return;
+
+        inventory.DraggedFromSlot.SetIconAlpha(1f);
+        inventory.SetDraggedTo(this);
+
+        if (item != null)
+        {
+            SwapItemWith(inventory.DraggedFromSlot);
+        }
+        else 
+        {
+            inventory.DraggedFromSlot.MoveItemTo(this);
+        }
+
+        inventory.SetDraggedFrom(null);
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if (inventory.DraggedToSlot == null)
+        {
+            SetIconAlpha(1f);
+            ClearItem();
+        }
+        else
+        {
+            inventory.SetDraggedTo(null);
+        }
+    }
+
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        // 
+    }
+}
+
+public static class ColorExtensions
+{
+    public static Color WithAlpha(this Color color, float alpha)
+    {
+        return new Color(color.r, color.g, color.b, alpha);
     }
 }

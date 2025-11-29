@@ -9,8 +9,11 @@ public class Inventory : MonoBehaviour
     [SerializeField] ItemSO TestItem;
 
     public bool IsFull { get; private set; }
+    public Slot DraggedFromSlot => draggedFromSlot;
+    public Slot DraggedToSlot => draggedToSlot;
 
-    private Slot selectedSlot;
+    private Slot draggedFromSlot;
+    private Slot draggedToSlot;
     private List<Slot> slots;
 
     void Awake()
@@ -47,9 +50,30 @@ public class Inventory : MonoBehaviour
         Debug.Log("Inventory is full!");
     }
 
-    public void SelectSlot(Slot slot)
+    public void RemoveItem(ItemSO item, int count)
     {
-        selectedSlot = slot;
+        if (!DoesItemExists(item, out Slot foundSlot))
+        {
+            Debug.LogWarning("Item does not exist in inventory!");
+            return;
+        }
+
+        if (!foundSlot.TryRemoveItem(count))
+        {
+            Debug.LogWarning("Not enough items to remove!");
+        }
+
+        IsFull = false;
+    }
+
+    public void SetDraggedFrom(Slot slot)
+    {
+        draggedFromSlot = slot;
+    }
+
+    public void SetDraggedTo(Slot slot)
+    {
+        draggedToSlot = slot;
     }
 
 
@@ -61,6 +85,20 @@ public class Inventory : MonoBehaviour
             slot.Initialize(this);
             this.slots.Add(slot);
         }
+    }
+
+    private bool DoesItemExists(ItemSO itemSO, out Slot foundSlot)
+    {
+        foreach (var slot in slots)
+        {
+            if (slot.Item == itemSO)
+            {
+                foundSlot = slot;
+                return true;
+            }
+        }
+        foundSlot = null;
+        return false;
     }
 
     private bool FindAvailableSlot(ItemSO itemSO, out Slot foundSlot)
@@ -89,4 +127,17 @@ public class Inventory : MonoBehaviour
     {
         AddItem(TestItem, 10);
     }
+
+    [Button(enabledMode: EButtonEnableMode.Playmode)]
+    private void TestRemoveItem()
+    {
+        RemoveItem(TestItem, 1);
+    }
+
+    [Button(enabledMode: EButtonEnableMode.Playmode)]
+    private void TestRemove10Item()
+    {
+        RemoveItem(TestItem, 10);
+    }
+
 }
