@@ -47,16 +47,16 @@
 * Player can swap items in inventory with the crafting result slot
 
 ## Features Left
-* Usable Chest 2, 4
-* Crafting Station 3, 5
-* Time Hop System 1, 2
-* Combat System 3, 5
+* Usable Chest
+* Crafting Station
+* Time Hop System
+* Combat System
 
-Estimate time needed to finish: 
+**Estimate time needed to finish**: 
 * ~16 hours, including bug fixing
 * ~9 hours, not including bug fixing
 
-Next Steps:
+**Next Steps**:
 * Reuse scripts from CraftingController and Inventory to create the Crafting Station
 * Reuse scripts from Inventory to create function chest
 * Make TimeManager Singleton that keep tracks of days, current time of day, and manage the time hopping mechanic
