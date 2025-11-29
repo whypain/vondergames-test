@@ -4,4 +4,8 @@
 
 | System Name | Expected Time | Actual Time |
 |-------------|---------------|-------------|
-| Example System | 2 hours | 2.5 hours |
+| Inventory System | 4 hours | N/A |
+| Crafting System | 2 hours | N/A |
+| Time Hop System | 2 hours | N/A |
+| Combat System | 3 hours | N/A |
+| Total | 11 hours | N/A |
