@@ -9,10 +9,12 @@ public class InventoryBar : Inventory
     [SerializeField] List<InputActionReference> hotkeyActions;
 
     public ItemSO CurrItem => currItem;
-    public Slot CurrSlot => currSlot;
-    public Action<Slot> OnCurrSlotChanged;
+    public HotbarSlot CurrSlot => currSlot;
 
-    private Slot currSlot;
+    public Action<HotbarSlot> OnCurrSlotChanged;
+    public Action<ItemSO> OnCurrItemChanged;
+
+    private HotbarSlot currSlot;
     private ItemSO currItem => currSlot?.Item;
 
     protected override void Awake()
@@ -20,7 +22,16 @@ public class InventoryBar : Inventory
         base.Awake();
         InitHotkeys();
 
-        currSlot = slots[0];
+        currSlot = slots[0] as HotbarSlot;
+        currSlot.OnItemChanged += OnItemChanged;
+    }
+
+    public void SetDraggable(bool draggable)
+    {
+        foreach (var slot in slots)
+        {
+            (slot as HotbarSlot).SetDraggable(draggable);
+        }
     }
 
     private void InitHotkeys()
@@ -35,10 +46,22 @@ public class InventoryBar : Inventory
         }
     }
 
+    private void OnItemChanged(ItemSO item)
+    {
+        OnCurrItemChanged?.Invoke(item);
+    }
+
     private void OnHotkeyPressed(int index)
     {
-        currSlot = slots[index];
+        if (index < 0 || index >= slots.Count) return;
+        if (currSlot == slots[index]) return;
+
+        currSlot.OnItemChanged -= OnItemChanged;
+        currSlot = slots[index] as HotbarSlot;
+        currSlot.OnItemChanged += OnItemChanged;
+
         selectedFrame.position = currSlot.transform.position;
         OnCurrSlotChanged?.Invoke(currSlot);
+        OnCurrItemChanged?.Invoke(currItem);
     }
 }

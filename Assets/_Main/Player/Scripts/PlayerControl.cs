@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -10,8 +11,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] InventoryBar inventoryBar;
     [SerializeField] Transform itemHoldPoint;
 
-    private bool isInventoryOpen = false;
-    private Slot currSlot;
+    private bool isInventoryOpen;
+    private bool isMouseOverUI;
     private Item currItem;
 
     private void Start()
@@ -19,9 +20,7 @@ public class PlayerControl : MonoBehaviour
         inventory.gameObject.SetActive(false);
         isInventoryOpen = false;
 
-        currSlot = inventoryBar.CurrSlot;
-        currSlot.OnItemChanged += OnItemChanged;
-        OnItemChanged(currSlot.Item);
+        OnItemChanged(inventoryBar.CurrSlot.Item);
 
         useItemAction.action.Enable();
     }
@@ -30,7 +29,7 @@ public class PlayerControl : MonoBehaviour
     {
         toggleInventoryAction.action.performed += ToggleInventory;
         useItemAction.action.performed += UseItem;
-        inventoryBar.OnCurrSlotChanged += OnCurrSlotChanged;
+        inventoryBar.OnCurrItemChanged += OnItemChanged;
 
         toggleInventoryAction.action.Enable();
     }
@@ -43,6 +42,11 @@ public class PlayerControl : MonoBehaviour
         toggleInventoryAction.action.Disable();
     }
 
+    private void Update()
+    {
+        isMouseOverUI = EventSystem.current.IsPointerOverGameObject();
+    }
+
     private void ToggleInventory(InputAction.CallbackContext context)
     {
         isInventoryOpen = !isInventoryOpen;
@@ -50,32 +54,24 @@ public class PlayerControl : MonoBehaviour
 
         if (isInventoryOpen) useItemAction.action.Disable();
         else useItemAction.action.Enable();
+
+        inventoryBar.SetDraggable(isInventoryOpen);
     }
 
 
     private void UseItem(InputAction.CallbackContext context)
     {
-        if (currItem == null) return;
+        if (currItem == null || isMouseOverUI) return;
+
         currItem.Use();
         if (inventoryBar.CurrItem.IsConsumable)
         {
-            inventoryBar.RemoveItem(currSlot, 1);
+            inventoryBar.RemoveItem(inventoryBar.CurrSlot, 1);
         }
-    }
-
-    private void OnCurrSlotChanged(Slot newSlot)
-    {
-        currSlot.OnItemChanged -= OnItemChanged;
-        currSlot = newSlot;
-        currSlot.OnItemChanged += OnItemChanged;
-
-        OnItemChanged(currSlot.Item);
     }
 
     private void OnItemChanged(ItemSO item)
     {
-        if (currItem == item) return;
-
         if (currItem != null)
         {
             Destroy(currItem.gameObject);
