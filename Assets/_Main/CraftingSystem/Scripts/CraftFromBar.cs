@@ -5,6 +5,7 @@ using UnityEngine;
 public class CraftFromBar : MonoBehaviour
 {
     [SerializeField] InventoryBar inventoryBar;
+    [SerializeField] Inventory inventory;
     [SerializeField] CraftingController craftingController;
     [SerializeField] Slot resultSlot;
     [SerializeField] CanvasGroup canvasGroup;
@@ -46,13 +47,16 @@ public class CraftFromBar : MonoBehaviour
     private void Craft()
     {
         if (cacheRecipe == null) return;
+        if (inventoryBar.IsFull && inventory.IsFull) return;
+
+        Inventory availableInventory = inventoryBar.IsFull ? inventory : inventoryBar;
 
         List<Material> materials = new List<Material>() { new Material(inventoryBar.CurrItem, inventoryBar.CurrSlot.ItemCount) };
         ItemSO craftedItem = craftingController.Craft(cacheRecipe, ref materials);
         if (craftedItem != null)
         {
             inventoryBar.CurrSlot.SetItem(inventoryBar.CurrSlot.Item, materials[0].Quantity);
-            inventoryBar.AddItem(craftedItem, 1);
+            availableInventory.AddItem(craftedItem, 1);
         }
     }
 

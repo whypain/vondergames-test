@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] Transform slotsParent;
     [SerializeField] ItemSO TestItem;
 
-    public bool IsFull { get; private set; }
+    public bool IsFull => slots.All(slot => slot.IsFull());
     public static Slot DraggedFromSlot => draggedFromSlot;
     public static Slot DraggedToSlot => draggedToSlot;
 
@@ -46,7 +47,6 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        IsFull = true;
         Debug.Log("Inventory is full!");
     }
 
@@ -67,8 +67,6 @@ public class Inventory : MonoBehaviour
         {
             Debug.LogWarning("Not enough items to remove!");
         }
-
-        IsFull = false;
     }
 
     public static void SetDraggedFrom(Slot slot)

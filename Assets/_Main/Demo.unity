@@ -1938,6 +1938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryBar: {fileID: 1354127889}
+  inventory: {fileID: 587466734}
   craftingController: {fileID: 7823302877176408533}
   resultSlot: {fileID: 7759571021521861959}
   canvasGroup: {fileID: 510448892}
